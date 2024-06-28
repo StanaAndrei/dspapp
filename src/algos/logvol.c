@@ -5,12 +5,7 @@
 
 void logvol(WAVFile *wavfile, int gain) {
     double gainFactor = pow(10.0, gain / 20.0);
-    printf("Gain factor: %f\n", gainFactor);
-
-    uint32_t numSamples = wavfile->header.subchunk2Size / (wavfile->header.bitsPerSample / 8);
-    printf("Number of samples: %u\n", numSamples);
-
-    for (uint32_t i = 0; i < numSamples; i++) {
+    for (uint32_t i = 0; i < nrsamp(wavfile); i++) {
         int32_t originalSample = wavfile->buffer[i];
 
         // Apply the gain factor
@@ -24,12 +19,6 @@ void logvol(WAVFile *wavfile, int gain) {
         }
 
         wavfile->buffer[i] = (int32_t)scaledSample;
-
-        // Debug print to track sample values
-        if (i < 10) { // Print only the first few samples for brevity
-            printf("Sample %u: Original: %d, Scaled: %d\n", 
-                   i, originalSample, (int32_t)scaledSample);
-        }
     }
 }
 
