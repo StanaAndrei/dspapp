@@ -1,5 +1,6 @@
 #include "wav.h"
 #include "file.h"
+#include "alloc.h"
 #include <string.h>
 
 void readWavFile(WAVFile *wavfile, const char path[]) {
@@ -11,18 +12,10 @@ void readWavFile(WAVFile *wavfile, const char path[]) {
     const int numSamples = subchunk2Size / (bitsPerSample / 8);
 
     // Allocate buffer for normalized 32-bit samples
-    wavfile->buffer = (uint32_t*)calloc(numSamples, sizeof(uint32_t));
-    if (wavfile->buffer == NULL) {
-        fprintf(stderr, "Failed to allocate memory for buffer.\n");
-        exit(EXIT_FAILURE);
-    }
+    wavfile->buffer = (uint32_t*)ehCalloc(numSamples, sizeof(uint32_t));
 
     // Read the original data into a temporary buffer
-    BYTE *originalBuffer = (BYTE*)calloc(subchunk2Size, sizeof(BYTE));
-    if (originalBuffer == NULL) {
-        fprintf(stderr, "Failed to allocate memory for temporary buffer.\n");
-        exit(EXIT_FAILURE);
-    }
+    BYTE *originalBuffer = (BYTE*)ehCalloc(subchunk2Size, sizeof(BYTE));
     fread(originalBuffer, sizeof(BYTE), subchunk2Size, f);
 
     // Convert samples to 32-bit normalized integers
@@ -61,11 +54,7 @@ void writeWavFile(const WAVFile *const wavfile, const char path[]) {
     const uint16_t bitsPerSample = wavfile->header.bitsPerSample;
     const int numSamples = subchunk2Size / (bitsPerSample / 8);
 
-    BYTE *outputBuffer = (BYTE*)calloc(subchunk2Size, sizeof(BYTE));
-    if (outputBuffer == NULL) {
-        fprintf(stderr, "Failed to allocate memory for output buffer.\n");
-        exit(EXIT_FAILURE);
-    }
+    BYTE *outputBuffer = (BYTE*)ehCalloc(subchunk2Size, sizeof(BYTE));
 
     for (int i = 0; i < numSamples; i++) {
         int32_t sampleValue = wavfile->buffer[i];
