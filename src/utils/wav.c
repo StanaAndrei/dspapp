@@ -82,3 +82,13 @@ void writeWavFile(const WAVFile *const wavfile, const char path[]) {
     free(outputBuffer);
     closeFile(fout);
 }
+
+int64_t clipSample(int64_t sample) {
+    if (sample > INT32_MAX) {
+        return INT32_MAX;
+    }
+    if (sample < INT32_MIN) {
+        return INT32_MIN;
+    }
+    return (int32_t)sample;
+}

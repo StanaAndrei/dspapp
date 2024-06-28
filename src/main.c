@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
-        fprintf(stderr, "Usage: %s --<algo> <filename.wav> [algo params]\n", argv[0]);
+        system("cat src/help.txt");
         exit(1);
     }
 
@@ -16,11 +16,15 @@ int main(int argc, char *argv[]) {
     readWavFile(&wavfile, argv[2]);
     if (!strcmp(argv[1], "--vol")) {
         logvol(&wavfile, atoi(argv[3]));
-    } else if (0) {
-        
+    } else if (!strcmp(argv[1], "--modulation")) {
+        if (argc == 5) {
+            tremolo(&wavfile, atof(argv[3]), atof(argv[4]));
+        } else {
+            ringMod(&wavfile, atof(argv[3]));
+        }
     } else {
-        fprintf(stderr, "Invalid option!\n");
-        //exit(1);
+        fprintf(stderr, "Option \"%s\" is invalid!\n", argv[1]);
+        exit(1);
     }
 
     writeWavFile(&wavfile, "output.wav");
