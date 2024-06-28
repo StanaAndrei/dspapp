@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 typedef unsigned char BYTE;
+#define dsz subchunk2Size
 
 typedef struct {
     char chunkID[4];       // "RIFF"
@@ -25,6 +26,9 @@ typedef struct {
     BYTE *buffer;
 } WAVFile;
 
+#define BYTES_OF(wavfile) (sizeof(BYTE) * wavfile.header.dsz + sizeof(WAVHeader))
+
 void readWavFile(WAVFile *wavfile, const char path[]);
+void writeWavFile(const WAVFile *const wavfile, const char path[]);
 
 #endif

@@ -11,3 +11,10 @@ void readWavFile(WAVFile *wavfile, const char path[]) {
 
     closeFile(f);
 }
+
+void writeWavFile(const WAVFile *const wavfile, const char path[]) {
+    FILE *fout = openFile(path, "wb");
+    fwrite(&wavfile->header, sizeof(WAVHeader), 1, fout);
+    fwrite(wavfile->buffer, sizeof(BYTE), wavfile->header.dsz, fout);
+    closeFile(fout);//*/
+}
