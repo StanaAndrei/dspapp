@@ -22,7 +22,12 @@ int main(int argc, char *argv[]) {
         } else {
             ringMod(&wavfile, atof(argv[3]));
         }
-    } else {
+    } else if (!strcmp(argv[1], "--delay")) {
+        if (argc == 4) {
+            addEcho(&wavfile, atoi(argv[3]));
+        }
+    }
+    else {
         fprintf(stderr, "Option \"%s\" is invalid!\n", argv[1]);
         exit(1);
     }
