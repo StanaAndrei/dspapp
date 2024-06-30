@@ -1,1 +1,3 @@
 Wrong usage!
+Correct usage: <exe_name> --<operation> <input_file_name>.wav [params]
+Params:
