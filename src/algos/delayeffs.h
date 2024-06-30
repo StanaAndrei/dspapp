@@ -8,6 +8,6 @@
 #define MOD_FREQ 20.
 
 void addEcho(WAVFile *wavfile, int circularBuffSize);
-void addFlanger(WAVFile *wavfile, int minBuffSize, int maxBuffSize, int modDepth);
+void addFlanger(WAVFile *wavfile, int minBuffSize, int maxBuffSize, double modDepth);
 
 #endif

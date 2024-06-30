@@ -25,6 +25,8 @@ int main(int argc, char *argv[]) {
     } else if (!strcmp(argv[1], "--delay")) {
         if (argc == 4) {
             addEcho(&wavfile, atoi(argv[3]));
+        } else {
+            addFlanger(&wavfile, atoi(argv[3]), atoi(argv[4]), atof(argv[5]));
         }
     }
     else {
@@ -33,5 +35,6 @@ int main(int argc, char *argv[]) {
     }
 
     writeWavFile(&wavfile, "output.wav");
+    free(wavfile.buffer);
     return 0;
 }
