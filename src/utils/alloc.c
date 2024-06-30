@@ -17,3 +17,18 @@ void* ehCalloc(size_t nmemb, size_t size) {
     }
     return mem;
 }
+
+void** allocMatrix(size_t lines, size_t cols, size_t size) {
+    void **matrix = ehCalloc(lines, sizeof(void*));
+    for (size_t i = 0; i < lines; i++) {
+        matrix[i] = ehCalloc(cols, size);
+    }
+    return matrix;
+}
+
+void freeMatrix(void **matrix, size_t lines) {
+    for (size_t i = 0; i < lines; i++) {
+        free(matrix[i]);
+    }
+    free(matrix);
+}

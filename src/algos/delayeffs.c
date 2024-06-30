@@ -18,3 +18,10 @@ void addEcho(WAVFile *wavfile, int circularBuffSize) {
     free(circularBuffer);
     free(circularBuffer2);
 }
+
+void addFlanger(WAVFile *wavfile, int minBuffSize, int maxBuffSize, int modDepth) {
+    uint32_t sampleRate = wavfile->header.sampleRate;
+    uint32_t numSamples = NR_SAMPS(wavfile);
+    uint16_t numChannels = wavfile->header.numChannels;
+    
+}
