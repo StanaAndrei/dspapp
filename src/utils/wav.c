@@ -12,7 +12,7 @@ void readWavFile(WAVFile *wavfile, const char path[]) {
     const int numSamples = subchunk2Size / (bitsPerSample / 8);
 
     // Allocate buffer for normalized 32-bit samples
-    wavfile->buffer = (uint32_t*)ehCalloc(numSamples, sizeof(uint32_t));
+    wavfile->buffer = (int32_t*)ehCalloc(numSamples, sizeof(int32_t));
 
     // Read the original data into a temporary buffer
     BYTE *originalBuffer = (BYTE*)ehCalloc(subchunk2Size, sizeof(BYTE));

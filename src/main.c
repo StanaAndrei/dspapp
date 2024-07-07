@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
-#include "./utils/wav.h"
 #include "./algos/algos.h"
-#include "./utils/file.h"
+#include "./utils/utils.h"
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+    bool shouldOutput = true;
     WAVFile wavfile;
     readWavFile(&wavfile, argv[2]);
     if (!strcmp(argv[1], "--vol")) {
@@ -28,13 +29,21 @@ int main(int argc, char *argv[]) {
         } else {
             addFlanger(&wavfile, atoi(argv[3]), atoi(argv[4]), atof(argv[5]));
         }
+    } else if (!strcmp(argv[1], "--dft")) {
+        dcomplex *output = performFT(&wavfile);
+        WAVFile* tmp = &wavfile;
+        for (int i = 0; i < NR_SAMPS(tmp); i++) {
+            printf("%d: %.5f + %.5fi\n", i, creal(output[i]), cimag(output[i]));
+        }
+        shouldOutput = false;
     }
     else {
         fprintf(stderr, "Option \"%s\" is invalid!\n", argv[1]);
-        exit(1);
     }
 
-    writeWavFile(&wavfile, "output.wav");
+    if (shouldOutput) {
+        writeWavFile(&wavfile, "output.wav");
+    }
     free(wavfile.buffer);
     return 0;
 }
