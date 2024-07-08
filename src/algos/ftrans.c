@@ -8,8 +8,8 @@ void dft(WAVFile *wavfile, dcomplex* output) {
     for (int k = 0; k < nrSamples; k++) {
         dcomplex sum = .0 * I;
         for (int n = 0; n < nrSamples; n++) {
-            double angle = -2. * M_PI * k * n / nrSamples;
-            sum += wavfile->buffer[n] * (cos(angle) + sin(angle) * I);
+            const double angle = 2. * M_PI * k * n / nrSamples;
+            sum += wavfile->buffer[n] * cexp(-I * angle);
         }
         output[k] = sum;
     }
@@ -54,3 +54,4 @@ dcomplex *performFT(WAVFile *wavfile) {
     }
     return output;
 }
+
