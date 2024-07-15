@@ -1,3 +1,3 @@
-*.exe
-*.wav
-*.txt
+build/*.exe
+build/*.wav
+build/*.txt

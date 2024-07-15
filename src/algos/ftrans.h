@@ -6,5 +6,6 @@
 typedef double complex dcomplex;
 
 dcomplex* performFT(WAVFile *wavfile);
+dcomplex* idft(dcomplex *input, int N);
 
 #endif

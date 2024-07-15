@@ -1,6 +1,7 @@
 #include "ftrans.h"
 
 #include <math.h>
+#include <stdint.h>
 #include "../utils/alloc.h"
 
 void dft(WAVFile *wavfile, dcomplex* output) {
@@ -55,3 +56,15 @@ dcomplex *performFT(WAVFile *wavfile) {
     return output;
 }
 
+dcomplex* idft(dcomplex *input, int N) {
+    dcomplex *output = (dcomplex*)ehCalloc(N, sizeof(dcomplex));
+    for (int n = 0; n < N; n++) {
+        dcomplex sum = .0 * I;
+        for (int k = 0; k < N; k++) {
+            const double angle = 2. * M_PI * k * n / N;
+            sum += input[k] * cexp(I * angle);
+        }
+        output[n] = sum;
+    }
+    return output;
+}
