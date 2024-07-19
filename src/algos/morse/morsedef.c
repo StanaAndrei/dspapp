@@ -23,6 +23,9 @@ const char ALPHABET[ALPHA_SIZE + 1] = "abcdefghijklmnopqrstuvwxyz";
 const char DIGITS[NR_DIGITS + 1] = "01234546789";
 
 char tokenToChar(const char token[MAX_CODE_LEN]) {
+    if (!token) {
+        return -1;
+    }
     for (int i = 0; i < ALPHA_SIZE; i++) {
         if (!strcmp(token, morseAlphabet[i])) {
             return ALPHABET[i];
@@ -33,14 +36,22 @@ char tokenToChar(const char token[MAX_CODE_LEN]) {
             return DIGITS[i];
         }
     }
+    if (*token == '/') {
+        return ' ';
+    }
     return -1;
 }
 
 char *morseToText(const char *const morseCode) {
-    const char *DELIM = " /";
+    const char *DELIM = " ";
     char *auxCode = ehStrdup(morseCode);
     char *token = strtok(auxCode, DELIM);
     while (token != NULL) {
+        char ans = tokenToChar(token);
+        if (ans == -1) {
+            fprintf(stderr, "Invalid char!\n");
+            exit(1);
+        }
         //putchar(tokenToChar(token));
         token = strtok(NULL, DELIM);
     }

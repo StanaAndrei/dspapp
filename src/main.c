@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
         shouldOutput = false;
     } else if (!strcmp(argv[1], "--morse-decode")) {
         shouldOutput = false;
-        const char *s = "-.. ... .--. .-.. .- -... ... .....";
+        const char *s = "-.. ... .--. .-.. .- -... ... / .....";
         morseToText(s);
     }
     else {
