@@ -1,5 +1,7 @@
 #include "alloc.h"
 
+#include <string.h>
+
 void* ehMalloc(size_t size) {
     void *mem = malloc(size);
     if (mem == NULL) {
@@ -31,4 +33,13 @@ void freeMatrix(void **matrix, size_t lines) {
         free(matrix[i]);
     }
     free(matrix);
+}
+
+char* ehStrdup(const char *const buffer) {
+    char *duplicated = strdup(buffer);
+    if (duplicated == NULL) {
+        perror("strdup");
+        exit(1);
+    }
+    return duplicated;
 }

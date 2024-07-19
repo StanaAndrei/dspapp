@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
-        system("cat src/help.txt");
+        fprintf(stderr, "Wrong usage!\n");
         exit(1);
     }
 
@@ -36,6 +36,10 @@ int main(int argc, char *argv[]) {
             printf("%d: %.5f + %.5fi\n", i, creal(output[i]), cimag(output[i]));
         }
         shouldOutput = false;
+    } else if (!strcmp(argv[1], "--morse-decode")) {
+        shouldOutput = false;
+        const char *s = "-.. ... .--. .-.. .- -... ... .....";
+        morseToText(s);
     }
     else {
         fprintf(stderr, "Option \"%s\" is invalid!\n", argv[1]);
