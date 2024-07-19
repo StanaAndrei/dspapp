@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 const char* morseAlphabet[] = {
     ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", 
@@ -42,18 +43,21 @@ char tokenToChar(const char token[MAX_CODE_LEN]) {
     return -1;
 }
 
-char *morseToText(const char *const morseCode) {
+string *morseToText(const char *const morseCode) {
     const char *DELIM = " ";
     char *auxCode = ehStrdup(morseCode);
     char *token = strtok(auxCode, DELIM);
+    string *text = str_create("");
+    assert(text);
     while (token != NULL) {
-        char ans = tokenToChar(token);
-        if (ans == -1) {
+        char ch = tokenToChar(token);
+        if (ch == -1) {
             fprintf(stderr, "Invalid char!\n");
             exit(1);
         }
-        //putchar(tokenToChar(token));
+        str_cappend(text, ch);
         token = strtok(NULL, DELIM);
     }
     free(auxCode);
+    return text;
 }

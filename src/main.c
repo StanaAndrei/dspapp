@@ -5,6 +5,7 @@
 
 #include "./algos/algos.h"
 #include "./utils/utils.h"
+#include "./libs/string.h"
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
@@ -39,7 +40,9 @@ int main(int argc, char *argv[]) {
     } else if (!strcmp(argv[1], "--morse-decode")) {
         shouldOutput = false;
         const char *s = "-.. ... .--. .-.. .- -... ... / .....";
-        morseToText(s);
+        string *text = morseToText(s);
+        puts(str_get(text));
+        str_free(text);
     }
     else {
         fprintf(stderr, "Option \"%s\" is invalid!\n", argv[1]);

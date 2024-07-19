@@ -1,8 +1,11 @@
 #ifndef __MORSEDEF_H
 #define __MORSEDEF_H
 
+#include "./../../libs/string.h"
+
+
 #define MAX_CODE_LEN 10
 
-char *morseToText(const char *const morseCode);
+string *morseToText(const char *const morseCode);
 
 #endif
