@@ -37,12 +37,13 @@ int main(int argc, char *argv[]) {
             printf("%d: %.5f + %.5fi\n", i, creal(output[i]), cimag(output[i]));
         }
         shouldOutput = false;
-    } else if (!strcmp(argv[1], "--morse-decode")) {
+    } else if (!strcmp(argv[1], "--morse-dec")) {
         shouldOutput = false;
-        const char *s = "-.. ... .--. .-.. .- -... ... / .....";
-        string *text = morseToText(s);
+        string *morseTxt = wavToTxt(&wavfile);
+        string *text = morseToText(str_get(morseTxt));
         puts(str_get(text));
         str_free(text);
+        str_free(morseTxt);//*/
     }
     else {
         fprintf(stderr, "Option \"%s\" is invalid!\n", argv[1]);

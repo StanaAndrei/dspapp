@@ -3,3 +3,4 @@
 #include "delayeffs.h"
 #include "ftrans.h"
 #include "./morse/morsedef.h"
+#include "./morse/wavtotxt.h"

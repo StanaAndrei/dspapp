@@ -4,7 +4,7 @@
 #include <stdint.h>
 typedef unsigned char BYTE;
 #define dsz subchunk2Size
-#define NR_SAMPS(wavfile) (wavfile->header.subchunk2Size / (wavfile->header.bitsPerSample / 8))
+#define NR_SAMPS(wavfile) (wavfile->header.subchunk2Size / (1ULL * wavfile->header.bitsPerSample / 8))
 
 typedef struct {
     char chunkID[4];       // "RIFF"
