@@ -17,6 +17,11 @@ const char* morseDigits[] = {
     "-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----."
 };
 
+const int SPACE_LIM = 3e4;
+const int LET_SEP_LIM = 13e3;
+const int LINE_LIM = 13e3;
+const int DOT_LIM = 5e3;
+
 #define ALPHA_SIZE ('z' - 'a' + 1)
 const char ALPHABET[ALPHA_SIZE + 1] = "abcdefghijklmnopqrstuvwxyz";
 
