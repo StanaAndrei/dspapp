@@ -2,8 +2,8 @@
 #define __WAVTOTXT_H
 
 #include "../../utils/utils.h"
-#include "../../libs/string.h"
+#include "../../libs/dynstr.h"
 
-string* wavToTxt(WAVFile *wavfile);
+DynStr wavToTxt(WAVFile *wavfile);
 
 #endif

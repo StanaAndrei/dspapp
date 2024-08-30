@@ -3,9 +3,10 @@
 
 #include <math.h>
 
-string *wavToTxt(WAVFile *wavfile) {
+DynStr wavToTxt(WAVFile *wavfile) {
     const int PROC_DISP_INT = 1e4;
-    string *morseTxt = str_create("");
+    DynStr morseTxt;
+    dynStrInit(&morseTxt);
     int nr = 0, nr0 = 0;
     const int nrSamps = NR_SAMPS(wavfile);
     for (int i = 0; i < nrSamps; i++) {
@@ -18,10 +19,10 @@ string *wavToTxt(WAVFile *wavfile) {
             nr0++;
         } else {
             if (nr0 > SPACE_LIM) {
-                str_append(morseTxt, " / ");
+                dynStrAppendStr(&morseTxt, " / ");
             }
             if (nr0 > LET_SEP_LIM) {
-                str_cappend(morseTxt, ' ');
+                dynStrAppendCh(&morseTxt, ' ');
             }
             nr0 = 0;
         }
@@ -31,10 +32,10 @@ string *wavToTxt(WAVFile *wavfile) {
         } else {
             if (nr != 0) {
                 if (nr > LINE_LIM) {
-                    str_cappend(morseTxt, '-');
+                    dynStrAppendCh(&morseTxt, '-');
                 }
                 if (nr < DOT_LIM) {
-                    str_cappend(morseTxt, '.');
+                    dynStrAppendCh(&morseTxt, '.');
                 }
             }
             nr = 0;

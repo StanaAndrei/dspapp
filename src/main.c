@@ -5,7 +5,7 @@
 
 #include "./algos/algos.h"
 #include "./utils/utils.h"
-#include "./libs/string.h"
+#include "./libs/dynstr.h"
 
 int main(int argc, char *argv[]) {
     if (argc < 3) {
@@ -39,11 +39,11 @@ int main(int argc, char *argv[]) {
         shouldOutput = false;
     } else if (!strcmp(argv[1], "--morse-dec")) {
         shouldOutput = false;
-        string *morseTxt = wavToTxt(&wavfile);
-        string *text = morseToText(str_get(morseTxt));
-        puts(str_get(text));
-        str_free(text);
-        str_free(morseTxt);//*/
+        DynStr morseTxt = wavToTxt(&wavfile);
+        DynStr text = morseToText(morseTxt.buffer);
+        puts(text.buffer);
+        free(morseTxt.buffer);
+        free(text.buffer);
     }
     else {
         fprintf(stderr, "Option \"%s\" is invalid!\n", argv[1]);
