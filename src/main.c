@@ -6,8 +6,10 @@
 #include "./algos/algos.h"
 #include "./utils/utils.h"
 #include "./libs/dynstr.h"
+//#include "./algos/morse/morsedef.h"
 
 int main(int argc, char *argv[]) {
+    //playDot();
     if (argc < 3) {
         fprintf(stderr, "Wrong usage!\n");
         exit(1);
