@@ -15,6 +15,9 @@ extern const int DOT_LIM;
 #define MAX_CODE_LEN 10
 
 DynStr morseToText(const char *const morseCode);
+DynStr textToMorse(const char *const text);
+void playMorse(const char *const morseCode);
+
 static inline void playDot() { system("play -nq -t alsa synth 0.2 sine 1000"); }
 static inline void playLine() { system("play -nq -t alsa synth 0.6 sine 1000"); }
 

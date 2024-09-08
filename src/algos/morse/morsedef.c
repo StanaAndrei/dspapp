@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#include <ctype.h>
+#include <unistd.h>
 
 const char* morseAlphabet[] = {
     ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", 
@@ -66,4 +68,48 @@ DynStr morseToText(const char *const morseCode) {
     }
     free(auxCode);
     return text;
+}
+
+DynStr textToMorse(const char *const text) {
+    DynStr ans;
+    dynStrInit(&ans);
+    for (int i = 0; text[i]; i++) {
+        char ch = tolower(text[i]);
+        if (isalpha(ch)) {
+            const int pos = strchr(ALPHABET, ch) - ALPHABET;
+            dynStrAppendStr(&ans, morseAlphabet[pos]);
+        } else if (isdigit(ch)) {
+            const int pos = ch - '0';
+            dynStrAppendStr(&ans, morseDigits[pos]);
+        } else if (isspace(ch)) {
+            dynStrAppendStr(&ans, " / ");
+        }
+        else {
+            fprintf(stderr, "Invalid char!\n");
+            exit(1);
+        }
+        dynStrAppendCh(&ans, ' ');
+    }
+    return ans;
+}
+
+#define MILLIS_TO_SEC(millis) (1e3LL * millis)
+void playMorse(const char *const morseCode) {
+    for (int i = 0; morseCode[i]; i++) {
+        switch (morseCode[i]) {
+            case '.': 
+                playDot(); 
+                break;
+            case '-':
+                playLine();
+                break;
+            case ' ':
+                sleep(1);
+                break;
+            default:
+                sleep(2);
+            
+            sleep(1);
+        }
+    }
 }

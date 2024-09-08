@@ -46,6 +46,8 @@ int main(int argc, char *argv[]) {
         puts(text.buffer);
         free(morseTxt.buffer);
         free(text.buffer);
+    } else if (0) {
+
     }
     else {
         fprintf(stderr, "Option \"%s\" is invalid!\n", argv[1]);
