@@ -9,10 +9,18 @@
 //#include "./algos/morse/morsedef.h"
 
 int main(int argc, char *argv[]) {
-    //playDot();
+    //playDot(); exit(0);
     if (argc < 3) {
         fprintf(stderr, "Wrong usage!\n");
         exit(1);
+    }
+
+    if (!strcmp(argv[1], "--morse-enc")) {
+        DynStr ds = textToMorse(argv[2]);
+        //puts(ds.buffer);
+        playMorse(ds.buffer);
+        dynStrFree(&ds);
+        exit(0);
     }
 
     bool shouldOutput = true;
@@ -46,8 +54,6 @@ int main(int argc, char *argv[]) {
         puts(text.buffer);
         free(morseTxt.buffer);
         free(text.buffer);
-    } else if (0) {
-
     }
     else {
         fprintf(stderr, "Option \"%s\" is invalid!\n", argv[1]);

@@ -1,4 +1,4 @@
-#include "wavtotxt.h"
+#include "convert.h"
 #include "morsedef.h"
 
 #include <math.h>

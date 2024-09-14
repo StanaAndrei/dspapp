@@ -1,5 +1,5 @@
-#ifndef __WAVTOTXT_H
-#define __WAVTOTXT_H
+#ifndef __CONVERT_H
+#define __CONVERT_H
 
 #include "../../utils/utils.h"
 #include "../../libs/dynstr.h"
