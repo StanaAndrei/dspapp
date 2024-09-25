@@ -4,3 +4,4 @@ build/*.txt
 *.exe
 *.wav
 *.txt
+./**/.o
