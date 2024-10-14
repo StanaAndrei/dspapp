@@ -1,5 +1,6 @@
 # dspapp
 
+To use(linux only) download the repo than run <<make>>.
 
 This app works via cl args. <br>
 Examples: <br>
